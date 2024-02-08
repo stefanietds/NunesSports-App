@@ -7,6 +7,7 @@ function Update() {
     const Navigate = useNavigate();
 
  const [values, setValues] = React.useState({
+    codigo_Produto: 0,
     nome_Produto: '',
     descricao_Produto: '',
     preco_Produto: 0
@@ -18,6 +19,7 @@ useEffect(() => {
             console.log(res);
             setValues({
                 ...values,
+                codigo_Produto: res.data.codigo_Produto,
                 nome_Produto: res.data.nome_Produto,
                 descricao_Produto: res.data.descricao_Produto,
                 preco_Produto: res.data.preco_Produto
@@ -27,7 +29,7 @@ useEffect(() => {
 }, [])
    const handleUpdate = (event) => {
     event.preventDefault();
-    axios.put(`http://localhost:5250/api/v1/Produto/${id}/${values.nome_Produto}/${values.descricao_Produto}/${values.preco_Produto}`)
+    axios.put(`http://localhost:5250/api/v1/Produto`, values)
     .then(res => {
         console.log(res)
         Navigate('/')
